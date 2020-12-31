@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2021年賀状</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script
+        src="https://unpkg.com/aframe-text-geometry-component@^0.5.0/dist/aframe-text-geometry-component.min.js"></script>
+
+    <script>
+        AFRAME.registerComponent('marker', {
+            init: function () {
+                const marker = this.el;
+                const modelEls = document.querySelectorAll('.model-el');
+
+                // マーカーを検出したイベントの登録
+                marker.addEventListener('markerFound', () => {
+                    modelEls.forEach(value => {
+                        value.emit('found');
+                    });
+                });
+
+                // マーカーを見失ったイベントの登録
+                marker.addEventListener('markerLost', () => {
+                    console.log('markerLost');
+                    modelEls.forEach(value => {
+                        value.emit('lost');
+                    });
+                });
+            }
+        });
+    </script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false; patternRatio: 0.7;">
+        <a-assets>
+            <a-asset-item id="main" src="model/main.glb">
+            </a-asset-item>
+            <a-asset-item id="mplus" src="fonts/mplus.typeface.json"></a-asset-item>
+        </a-assets>
+        <a-marker type='pattern' url='./patt/pattern-ushi.patt' marker>
+            <a-entity class="model-el" id="main-el" gltf-model="#main" modify-materials position="0 0 0"
+                rotation="0 0 0">
+            </a-entity>
+
+            <a-entity id="name" text-geometry="value:ゆに様 ひまりちゃん; font: #mplus; size: 0.1" material="color: black;"
+                position="0 2 0" rotation="0 0 0"></a-entity>
+            <a-entity id="greeding" text-geometry="value: 謹賀新年; font: #mplus; size: 0.1" material="color: black;"
+                position="0 1 0" rotation="0 0 0">
+            </a-entity>
+            <a-entity text-geometry="value: お二人にとって幸多き年となりますよう\nお祈り申し上げます。; font: #mplus; size: 0.1"
+                material="color: black;" position="0 0 0" rotation="0 0 0"></a-entity>
+
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+
+</html>
