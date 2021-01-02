@@ -65,13 +65,8 @@
     </a-scene>
     <script>
         const userAgent = window.navigator.userAgent.toLowerCase();
-        if (userAgent.indexOf('edge') != -1) {
-            // クローム判定用のダミー分岐
-        } else if (userAgent.indexOf('chrome') != -1 && (userAgent.indexOf('iphone') != -1 || userAgent.indexOf('ipad') != -1)) {
+        if (userAgent.indexOf('crios') != -1 && (userAgent.indexOf('iphone') != -1 || userAgent.indexOf('ipad') != -1)) {
             alert('iOSの場合はsafariで開いてください。')
-        }else{
-            alert(userAgent)
-
         }
     </script>
 </body>
