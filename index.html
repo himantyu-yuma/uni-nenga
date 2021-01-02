@@ -52,18 +52,25 @@
             <!-- <a-entity class="model-el" id="main-el" gltf-model="#main" modify-materials position="0 0 0"
                 rotation="0 0 0">
             </a-entity> -->
-            <a-entity class="model-el" gltf-model="#mountain" modify-materials position="0 0 0"
-                rotation="0 0 0">
+            <a-entity class="model-el" gltf-model="#mountain" modify-materials position="0 0 0" rotation="0 0 0">
             </a-entity>
             <a-entity class="model-el" gltf-model="#moon" position="0 -1 0" rotation="0 0 0"
                 animation="property: position; to: 0 0 0; loop: false; dur: 3000; startEvents: found; pauseEvents: lost;">
             </a-entity>
 
-            <a-entity id="name" text-geometry="value: HAPPY NEW YEAR!; font: #mplus; size: 0.2"
-                position="-1.3 3 1" rotation="0 0 0"></a-entity>
+            <a-entity id="name" text-geometry="value: HAPPY NEW YEAR!; font: #mplus; size: 0.2" position="-1.3 3 1"
+                rotation="0 0 0"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+    <script>
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        if (userAgent.indexOf('edge') != -1) {
+            // クローム判定用のダミー分岐
+        } else if (userAgent.indexOf('chrome') != -1 && (userAgent.indexOf('iphone') != -1 || userAgent.indexOf('ipad') != -1)) {
+            alert('iOSの場合はsafariで開いてください。')
+        }
+    </script>
 </body>
 
 </html>
